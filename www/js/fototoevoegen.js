@@ -48,7 +48,7 @@ function onSuccess(imageData) {
 	var width;
 	
 	imageObj.src = "data:image/jpeg;base64," + imageData;
-	
+	//window.foto =  imageData;
 	width = imageObj.width; //breedte van afbeelding nemen
 	canvas.setAttribute('width', width); //canvas breedte instellen
 	canvas.setAttribute('height', width); //canvas hoogte instellen
@@ -56,6 +56,7 @@ function onSuccess(imageData) {
 	var dataURL = canvas.toDataURL(); //dataURL vullen 
 	document.getElementById("defImg").setAttribute('crossOrigin', 'anonymous');
 	document.getElementById("defImg").src = dataURL; //afbeelding toekennen
+       
     }
     else if(/(iphone)|(ipad)/i.test(navigator.userAgent)){
         var image = document.getElementById('defImg');

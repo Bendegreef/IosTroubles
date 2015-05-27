@@ -28,28 +28,28 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 
-	$(".public_private").click(function () {
-		$(".publiek-prive").fadeIn(300);
-	});
-	
-	$(".li-popupprive, .li-popuppubliek, .publiek-prive, .wrapper ").click(function(){
-		$(".publiek-prive").fadeOut(300);
-	
-	});
-	
-	$(".li-popupprive").click(function() {
-		$(".public_private").text("privé");
-	
-	});
-	
-	$(".li-popuppubliek").click(function() {
-		$(".public_private").text("publiek");
-	
-	});
- 
+    $(".public_private").click(function () {
+        $(".publiek-prive").fadeIn(300);
+    });
+
+    $(".li-popupprive, .li-popuppubliek, .publiek-prive, .wrapper ").click(function () {
+        $(".publiek-prive").fadeOut(300);
+
+    });
+
+    $(".li-popupprive").click(function () {
+        $(".public_private").text("privé");
+
+    });
+
+    $(".li-popuppubliek").click(function () {
+        $(".public_private").text("publiek");
+
+    });
+
 
 });
-  
+
 /* ---------------------------------------- */
 
 
@@ -73,5 +73,3 @@ $(document).ready(function () {
 });
 
 /* ---------------------------------------- */
-
-
