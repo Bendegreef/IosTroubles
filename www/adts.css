@@ -722,7 +722,7 @@ input:-moz-placeholder {
     background-color: #2C3E50;
 }
 #canvas, #myImage {
-	/*display: none;*/
+	display: none;
 }
 #defImg {
 	display: block;
