@@ -56,7 +56,7 @@ function onSuccess(imageData) {
 	var dataURL = canvas.toDataURL(); //dataURL vullen 
 	document.getElementById("defImg").setAttribute('crossOrigin', 'anonymous');
 	document.getElementById("defImg").src = dataURL; //afbeelding toekennen
-    window.foto = dataURL.replace("data:image/jpeg;base64,", "");
+       
     }
     else if(/(iphone)|(ipad)/i.test(navigator.userAgent)){
         var image = document.getElementById('defImg');
