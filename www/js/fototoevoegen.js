@@ -28,7 +28,7 @@ function takePicture(e) {
 		alert("no camera!");
 	} else {
 		navigator.camera.getPicture(onSuccess, onFail, {
-			quality: 50,
+			quality: 40,
 			destinationType: navigator.camera.DestinationType.DATA_URL,
 			allowEdit: true,
 			correctOrientation: true
@@ -37,20 +37,30 @@ function takePicture(e) {
 }
 
 function onSuccess(imageData) {
-	var canvas = document.getElementById("canvas");
+
+	
+	
+	/*Functie android crop rights reserved Ben de Greef*/
+    if(/android/i.test(navigator.userAgent)){
+    var canvas = document.getElementById("canvas");
 	var context = canvas.getContext("2d");
 	var imageObj = document.getElementById("myImage");
 	var width;
+	
 	imageObj.src = "data:image/jpeg;base64," + imageData;
-
-	width = imageObj.width;
-
-	canvas.setAttribute('width', width);
-	canvas.setAttribute('height', width);
-	context.drawImage(imageObj, 0, 0, width, width, 0, 0, width, width);
-	var dataURL = canvas.toDataURL();
+	
+	width = imageObj.width; //breedte van afbeelding nemen
+	canvas.setAttribute('width', width); //canvas breedte instellen
+	canvas.setAttribute('height', width); //canvas hoogte instellen
+	context.drawImage(imageObj, 0, 0, width, width, 0, 0, width, width); //afbeelding tekenen
+	var dataURL = canvas.toDataURL(); //dataURL vullen 
 	document.getElementById("defImg").setAttribute('crossOrigin', 'anonymous');
-	document.getElementById("defImg").src = dataURL;
+	document.getElementById("defImg").src = dataURL; //afbeelding toekennen
+    }
+    else if(/(iphone)|(ipad)/i.test(navigator.userAgent)){
+        var image = document.getElementById('defImg');
+    	image.src = "data:image/jpeg;base64," + imageData;
+    }
 }
 
 function onFail(message) {
