@@ -124,21 +124,22 @@ $(document).ready(function () {
         //}
 
 
-        if ($("#defImg").attr("src") !== "undefined ") {
+        if ($("#defImg").attr("src") !== "") {
+            alert('if');
             verzendenMetFoto(inlogCode, from, message, pb);
 
         }
         else {
-
-            verzendenZonderFoto(inlogCode, from, message);
+alert('else');
+            verzendenZonderFoto(inlogCode, from, message, pb);
         } 
 
     }
 });
 
 
-var verzendenZonderFoto = function (inlogCode, from, message) {
-    var postData = 'code=' + inlogCode + '&from=' + from + '&message=' + message;
+var verzendenZonderFoto = function (inlogCode, from, message, pb) {
+    var postData = 'code=' + inlogCode + '&from=' + from + '&message=' + message + '&public=' + pb;
     var url = 'http://api.adaytoshare.be/1/guestbook/post';
 
     var sendData = {
