@@ -3,7 +3,6 @@ devel: true,
 browser: true,
 jquery: true
 */
-/*global foto: true*/
 
 /* --------------Naam-Event + naam persoon-------------------------- */
 
@@ -96,37 +95,13 @@ $(document).ready(function () {
         var email = localStorage.getItem('email');
         var public_private = $('.public_private').text();
         var pb = 1;
-       // var foto = $("#defImg").attr("src").replace("data:image/png;base64,", "");
+        // var foto = $("#defImg").attr("src").replace("data:image/png;base64,", "");
         if (public_private == "privé")
             pb = 0;
 
-        if($("#defImg").attr("src") == ""){
-        var postData = 'code=' + inlogCode + '&from=' + from + '&message=' + message;
-        var url = 'http://api.adaytoshare.be/1/guestbook/post';
-
-        var sendData = {
-            'url': url,
-            'postData': postData
-        };
-
-        $.ajax({
-            //url: 'http://dtdl.ehb.be/~jan.klaas.vdm/crosscall.php',
-            url: 'http://api.adaytoshare.be/1/guestbook/post?code=' + inlogCode + '&from=' + from + '&message=' + message,
-            //type: 'POST',
-            // data: sendData,
-            dataType: 'json',
-            cache: false,
-            success: function (responseData) {
-                window.location = "timeline.html";
-            },
-            error: function (err) {
-                alert('error');
-            }
-        });
-        }else{
         //if (email != '')
         //postData = "code=" + inlogCode + "&from=" + from + "&message=" + message + "&email=" + email + "&public=" + pb;
-  /*      if ($("#defImg").attr("src") !== "") {
+        /*      if ($("#defImg").attr("src") !== "") {
              postData = "code=" + inlogCode + "&from=" + from + "&message=" + message + "&public=" + pb + '&photo=' + photo;
             $.ajax({
                 //url: 'http://dtdl.ehb.be/~jan.klaas.vdm/crosscall.php',
@@ -146,31 +121,67 @@ $(document).ready(function () {
 
 */
 
-
-
-
-
-
         //}
 
-  $.ajax({
-            url: "http://api.adaytoshare.be/1/guestbook/post_with_media_base64",
-            data: {
-                code: inlogCode,
-                from: from,
-				photo: foto,
-                message: message,
-                public: pb
-            },
-			datatype: 'json',
-            type: 'post',
-            async: false,
-            success: function (data) {
-                window.location = "timeline.html";
-            }
-        });
+
+        if ($("#defImg").attr("src") !== "undefined ") {
+            verzendenMetFoto(inlogCode, from, message, pb);
 
         }
+        else {
+
+            verzendenZonderFoto(inlogCode, from, message);
+        } 
 
     }
 });
+
+
+var verzendenZonderFoto = function (inlogCode, from, message) {
+    var postData = 'code=' + inlogCode + '&from=' + from + '&message=' + message;
+    var url = 'http://api.adaytoshare.be/1/guestbook/post';
+
+    var sendData = {
+        'url': url,
+        'postData': postData
+    };
+
+    $.ajax({
+        url: 'http://dtdl.ehb.be/~jan.klaas.vdm/crosscall.php',
+        //url: 'http://api.adaytoshare.be/1/guestbook/post?code=' + inlogCode + '&from=' + from + '&message=' + message,
+        type: 'POST',
+        data: sendData,
+       // async: false,
+        dataType: 'json',
+        cache: false,
+        success: function (responseData) {
+            window.location = "timeline.html";
+        },
+        error: function (err) {
+            alert('error');
+        }
+    });
+};
+
+var verzendenMetFoto = function (inlogCode, from, message, pb) {
+    $.ajax({
+        url: "http://api.adaytoshare.be/1/guestbook/post_with_media_base64",
+        data: {
+            code: inlogCode,
+            from: from,
+            photo: foto,
+            message: message,
+            public: pb
+        },
+        async: false,
+        datatype: 'json',
+        type: 'post',
+       // async: false,
+        success: function (data) {
+
+                window.location = "timeline.html";
+        }
+
+    });
+
+};
